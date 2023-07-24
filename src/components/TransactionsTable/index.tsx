@@ -1,5 +1,6 @@
 import { useTransactions } from '../../contexts/Hooks/useTransactions'
 import { GlobalComponentContainer } from '../../styles/global'
+import { dateFormatter, priceFormatter } from '../../utils/formatter'
 import { PriceHighlight, TableElement, TdElement, TrElement } from './styles'
 
 export const TransactionsTable = () => {
@@ -13,12 +14,14 @@ export const TransactionsTable = () => {
             <TrElement key={transaction.id}>
               <TdElement>{transaction.description}</TdElement>
               <TdElement>
-                <PriceHighlight
-                  $type={transaction.type}
-                >{`R$ ${transaction.price},00`}</PriceHighlight>
+                <PriceHighlight $type={transaction.type}>
+                  {priceFormatter.format(transaction.price)}
+                </PriceHighlight>
               </TdElement>
               <TdElement>{transaction.category}</TdElement>
-              <TdElement>{transaction.createdAt}</TdElement>
+              <TdElement>
+                {dateFormatter.format(new Date(transaction.createdAt))}
+              </TdElement>
             </TrElement>
           ))}
         </tbody>
