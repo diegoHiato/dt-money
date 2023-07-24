@@ -12,14 +12,18 @@ export const PriceHighlight = styled.span<PriceHighlight>`
 `
 
 export const TdElement = styled.td`
-  flex: 1;
+  max-width: 240px;
   padding: 1.25rem 2rem;
   background-color: ${(props) => props.theme['gray-700']};
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
 `
 
 export const TrElement = styled.tr`
   & > ${TdElement}:first-of-type {
-    width: calc(max-content + 2rem);
+    width: 50%;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
   }
