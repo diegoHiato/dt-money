@@ -1,12 +1,10 @@
-import { Transaction } from '../../pages/Transactions'
+import { useTransactions } from '../../contexts/Hooks/useTransactions'
 import { GlobalComponentContainer } from '../../styles/global'
 import { PriceHighlight, TableElement, TdElement, TrElement } from './styles'
 
-interface TransactionsTableProps {
-  transactions: Transaction[]
-}
+export const TransactionsTable = () => {
+  const { transactions } = useTransactions()
 
-export const TransactionsTable = ({ transactions }: TransactionsTableProps) => {
   return (
     <GlobalComponentContainer>
       <TableElement>
