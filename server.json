@@ -1,0 +1,20 @@
+{
+  "transactions": [
+    {
+      "id": "dde782d7-34ec-477c-84d9-d088e6cf9963",
+      "description": "Software Development",
+      "type": "income",
+      "category": "Sale",
+      "price": 12000,
+      "createdAd": "2023-07-24T15:46:43.842Z"
+    },
+    {
+      "id": "e957aef0-75f7-4a1d-bfc7-5b4f604a9f8b",
+      "description": "Rental",
+      "type": "outgo",
+      "category": "Home Expenses",
+      "price": 2500,
+      "createdAd": "2023-07-24T15:48:55.991Z"
+    }
+  ]
+}
