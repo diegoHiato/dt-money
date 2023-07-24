@@ -15,7 +15,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "server": "npx json-server server.json -w",
+    "server": "npx json-server server.json -w -d 500",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
