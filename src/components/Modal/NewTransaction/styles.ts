@@ -29,8 +29,13 @@ export const NewTransactionModalSubmitButton = styled.button`
   cursor: pointer;
 
   transition: background-color 0.15s;
-  &:hover {
+  &:not(:disabled):hover {
     background-color: ${appTheme['green-700']};
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
   }
 `
 

@@ -1,5 +1,8 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ArrowCircleDown, ArrowCircleUp, X } from 'phosphor-react'
+import { Controller, useForm } from 'react-hook-form'
+import * as zod from 'zod'
 import {
   NewTransactionModalCloseButton,
   NewTransactionModalContent,
@@ -9,7 +12,29 @@ import {
   TypeButton,
 } from './styles'
 
+const newTransactionFormSchema = zod.object({
+  description: zod.string(),
+  valueAmount: zod.number(),
+  category: zod.string(),
+  type: zod.enum(['income', 'outgo']),
+})
+
+type NewTransactionForm = zod.infer<typeof newTransactionFormSchema>
+
 export const NewTransactionModal = () => {
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<NewTransactionForm>({
+    resolver: zodResolver(newTransactionFormSchema),
+  })
+
+  function handleCreateTransaction(data: NewTransactionForm) {
+    return null
+  }
+
   return (
     <Dialog.Portal>
       <NewTransactionModalOverlay />
@@ -20,24 +45,56 @@ export const NewTransactionModal = () => {
         </NewTransactionModalCloseButton>
         <Dialog.Title>{'New transaction'}</Dialog.Title>
 
-        <form action="">
-          <input type="text" placeholder="Description" required />
-          <input type="number" placeholder="Value amount" required />
-          <input type="text" placeholder="Category" required />
+        <form onSubmit={handleSubmit(handleCreateTransaction)}>
+          <input
+            type="text"
+            placeholder="Description"
+            required
+            {...register('description')}
+          />
 
-          <NewTransactionTypeButtonsContainer>
-            <TypeButton value="income" $type="income">
-              <ArrowCircleUp size={24} />
-              {'Income'}
-            </TypeButton>
+          <input
+            type="number"
+            placeholder="Value amount"
+            step={0.01}
+            required
+            {...register('valueAmount', { valueAsNumber: true })}
+          />
 
-            <TypeButton value="outgo" $type="outgo">
-              <ArrowCircleDown size={24} />
-              {'Outgo'}
-            </TypeButton>
-          </NewTransactionTypeButtonsContainer>
+          <input
+            type="text"
+            placeholder="Category"
+            required
+            {...register('category')}
+          />
 
-          <NewTransactionModalSubmitButton type="submit">
+          <Controller
+            control={control}
+            name="type"
+            render={({ field }) => {
+              return (
+                <NewTransactionTypeButtonsContainer
+                  value={field.value}
+                  onValueChange={field.onChange}
+                >
+                  <TypeButton value="income" $type="income">
+                    <ArrowCircleUp size={24} />
+                    {'Income'}
+                  </TypeButton>
+
+                  <TypeButton value="outgo" $type="outgo">
+                    <ArrowCircleDown size={24} />
+                    {'Outgo'}
+                  </TypeButton>
+                </NewTransactionTypeButtonsContainer>
+              )
+            }}
+          />
+
+          <NewTransactionModalSubmitButton
+            type="submit"
+            disabled={isSubmitting}
+          >
             {'Submit'}
           </NewTransactionModalSubmitButton>
         </form>
