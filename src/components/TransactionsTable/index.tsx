@@ -1,10 +1,14 @@
-import { useTransactions } from '../../contexts/Hooks/useTransactions'
+import { useContextSelector } from 'use-context-selector'
+import { TransactionsContext } from '../../contexts/Transactions/Context'
 import { GlobalComponentContainer } from '../../styles/global'
 import { dateFormatter, priceFormatter } from '../../utils/formatter'
 import { PriceHighlight, TableElement, TdElement, TrElement } from './styles'
 
 export const TransactionsTable = () => {
-  const { transactions } = useTransactions()
+  const transactions = useContextSelector(
+    TransactionsContext,
+    (context) => context.transactions,
+  )
 
   return (
     <GlobalComponentContainer>

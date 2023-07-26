@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { jsonServerApi } from '../../services/jsonServerApi'
 import { NewTransactionData, Transaction, TransactionsContext } from './Context'
 
@@ -11,24 +11,22 @@ export const TransactionsProvider = ({
 }: TransactionsProviderProps) => {
   const [transactions, setTransactions] = useState<Transaction[]>([])
 
-  async function createTransaction({
-    description,
-    price,
-    category,
-    type,
-  }: NewTransactionData) {
-    await jsonServerApi
-      .post('/transactions', {
-        description,
-        price,
-        category,
-        type,
-        createdAt: new Date(),
-      })
-      .then(({ data: newTransaction }) =>
-        setTransactions((previous) => [newTransaction, ...previous]),
-      )
-  }
+  const createTransaction = useCallback(
+    async ({ description, price, category, type }: NewTransactionData) => {
+      await jsonServerApi
+        .post('/transactions', {
+          description,
+          price,
+          category,
+          type,
+          createdAt: new Date(),
+        })
+        .then(({ data: newTransaction }) =>
+          setTransactions((previous) => [newTransaction, ...previous]),
+        )
+    },
+    [],
+  )
 
   async function fetchTransactions(query?: string) {
     await jsonServerApi

@@ -1,7 +1,11 @@
-import { useTransactions } from '../contexts/Hooks/useTransactions'
+import { useContextSelector } from 'use-context-selector'
+import { TransactionsContext } from '../contexts/Transactions/Context'
 
 export const useSummary = () => {
-  const { transactions } = useTransactions()
+  const transactions = useContextSelector(
+    TransactionsContext,
+    (context) => context.transactions,
+  )
   const summary = transactions.reduce(
     (accumulator, transaction) => {
       switch (transaction.type) {
