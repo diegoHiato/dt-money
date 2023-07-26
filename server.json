@@ -15,6 +15,54 @@
       "category": "Home Expenses",
       "price": 2500,
       "createdAt": "2023-07-24T15:48:55.991Z"
+    },
+    {
+      "description": "Elden Ring",
+      "price": 75.8,
+      "category": "Entertainment",
+      "type": "outgo",
+      "createdAt": "2023-07-26T01:26:52.710Z",
+      "id": "cCTz9is"
+    },
+    {
+      "description": "Monthly Supplements",
+      "price": 325.84,
+      "category": "Home Expenses",
+      "type": "outgo",
+      "createdAt": "2023-07-26T01:28:33.333Z",
+      "id": "HO5YDmZ"
+    },
+    {
+      "description": "Dark Souls 3",
+      "price": 69.9,
+      "category": "Entertainment",
+      "type": "outgo",
+      "createdAt": "2023-07-26T01:43:26.847Z",
+      "id": "p0qNKIg"
+    },
+    {
+      "description": "Dark Souls 2",
+      "price": 28.9,
+      "category": "Entertainment",
+      "type": "outgo",
+      "createdAt": "2023-07-26T01:49:19.030Z",
+      "id": "mDWbA_s"
+    },
+    {
+      "description": "Dark Souls Remake",
+      "price": 99.8,
+      "category": "Entertainment",
+      "type": "outgo",
+      "createdAt": "2023-07-26T01:50:11.418Z",
+      "id": "O9pKEOo"
+    },
+    {
+      "description": "Website GRU Madeiras & Ferragens",
+      "price": 3200,
+      "category": "Sale",
+      "type": "income",
+      "createdAt": "2023-07-26T01:51:39.284Z",
+      "id": "dSc3t7_"
     }
   ]
 }

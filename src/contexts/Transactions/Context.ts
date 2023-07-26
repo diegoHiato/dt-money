@@ -9,8 +9,16 @@ export interface Transaction {
   createdAt: string
 }
 
+export interface NewTransactionData {
+  description: Transaction['description']
+  price: Transaction['price']
+  category: Transaction['category']
+  type: Transaction['type']
+}
+
 interface TransactionsContextType {
   transactions: Transaction[]
+  createTransaction: (newTransactionData: NewTransactionData) => Promise<void>
   fetchTransactions: (query?: string) => Promise<void>
 }
 
