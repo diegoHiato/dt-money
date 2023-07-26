@@ -1,4 +1,5 @@
-import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
+import { jsonServerApi } from '../../services/jsonServerApi'
 import { Transaction, TransactionsContext } from './Context'
 
 interface TransactionsProviderProps {
@@ -10,22 +11,23 @@ export const TransactionsProvider = ({
 }: TransactionsProviderProps) => {
   const [transactions, setTransactions] = useState<Transaction[]>([])
 
-  const loadTransactions = async (
-    dispatch: Dispatch<SetStateAction<Transaction[]>>,
-  ) => {
-    const response = await fetch('http://localhost:3000/transactions')
-    const data = (await response.json()) as Transaction[]
-    dispatch(data)
+  const fetchTransactions = async (query?: string) => {
+    await jsonServerApi
+      .get<Transaction[]>('/transactions', {
+        params: { q: query },
+      })
+      .then(({ data }) => setTransactions(data))
   }
 
   useEffect(() => {
-    loadTransactions(setTransactions)
+    fetchTransactions()
   }, [])
 
   return (
     <TransactionsContext.Provider
       value={{
         transactions,
+        fetchTransactions,
       }}
     >
       {children}
