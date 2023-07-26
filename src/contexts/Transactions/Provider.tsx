@@ -28,7 +28,7 @@ export const TransactionsProvider = ({
     [],
   )
 
-  async function fetchTransactions(query?: string) {
+  const fetchTransactions = useCallback(async (query?: string) => {
     await jsonServerApi
       .get<Transaction[]>('/transactions', {
         params: {
@@ -38,11 +38,11 @@ export const TransactionsProvider = ({
         },
       })
       .then(({ data }) => setTransactions(data))
-  }
+  }, [])
 
   useEffect(() => {
     fetchTransactions()
-  }, [])
+  }, [fetchTransactions])
 
   return (
     <TransactionsContext.Provider
